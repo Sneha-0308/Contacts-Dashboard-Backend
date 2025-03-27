@@ -1,6 +1,7 @@
 const {constants} = require('../constant');
 
 const errorHandler = (err,req,res,next)=>{
+    console.log("error is passing to handler");
     const statusCode = res.statusCode ||500;
     console.log("status code>>>",res.statusCode);
     switch(statusCode){

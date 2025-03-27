@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const registerUser = asyncHandler(async (req,res)=>{
+    //validator   joi validator
     const {username, email, password} = req.body;
     if(!username || !email || !password){
         res.status(400);
@@ -13,7 +14,8 @@ const registerUser = asyncHandler(async (req,res)=>{
     const userAvailable = await User.findOne({email});
     if(userAvailable){
         res.status(400);
-        throw new Error("User already registered");
+        // throw new Error("User already registered");
+        console.log("error already user exist");
     }
 
     const hashdePassword = await bcrypt.hash(password,10);
@@ -26,7 +28,7 @@ const registerUser = asyncHandler(async (req,res)=>{
         res.status(201).json({_id:user.id, email: user.email});
     }else{
         res.status(400);
-        throw new Error("User data is not valid")
+        throw new Error("User data is not valid");
     }
 });
 
